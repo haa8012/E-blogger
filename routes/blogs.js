@@ -13,7 +13,9 @@ const Blog = require('../models/Blog');
 // @access    Public
 router.get('/all', async (req, res) => {
   try {
-    const blogs = await Blog.find({});
+    const blogs = await Blog.find({}).sort({
+      date: -1,
+    });
     res.json(blogs);
   } catch (err) {
     console.error(err.message);
