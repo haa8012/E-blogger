@@ -96,13 +96,17 @@ img {
 
 /* Cards */
 .card {
-  padding: 1rem;
+  margin: auto;
+  text-align: center;
+  /* padding: 1rem; */
+  max-width: 700px;
   background-color: #fff;
   /* border: rgb(224, 224, 224) 1px dotted !important; */
 
   border: 1px solid rgba(0, 0, 0, 0.1) !important;
-  margin: 1.7rem 0;
-  padding: 25px;
+  /* margin: 1.7rem 0; */
+  margin-bottom: 1.7rem;
+  padding: 0px 0px;
   border-radius: 10px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   /* box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.3); */
@@ -132,6 +136,18 @@ img {
 .p-3 {
   padding: 3rem;
 }
+.px {
+  padding: 0 0.5rem;
+}
+.px-1 {
+  padding: 0 1rem;
+}
+.px-2 {
+  padding: 0 2rem;
+}
+.px-3 {
+  padding: 0 3rem;
+}
 .py {
   padding: 0.5rem 0;
 }
@@ -143,6 +159,13 @@ img {
 }
 .py-3 {
   padding: 3rem 0;
+}
+.p-nb {
+  padding: 2rem 2rem 0 2rem;
+}
+
+.p-nt {
+  padding: 0 2rem 0.5rem 2rem;
 }
 
 /* Margin */

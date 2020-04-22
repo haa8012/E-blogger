@@ -20,8 +20,8 @@ const BlogItem = ({ blog }) => {
   };
 
   return (
-    <div className='card bg-light'>
-      <h3 className='text-primary text-left'>
+    <div className='card'>
+      <h3 className='text-primary text-left p-nb'>
         {title}
         <span
           style={{ float: 'right' }}
@@ -32,27 +32,17 @@ const BlogItem = ({ blog }) => {
           {type.charAt(0).toUpperCase() + type.slice(1)}
         </span>
       </h3>
-      <div>{date}</div>
+      <div className='text-left p-nt'>{date}</div>
       {image && <img src={image} alt='' />}
       <ul className='list'>
-        {detail && (
-          <li>
-            {/* <i className='fas fa-envelope-open' />  */}
-            {detail}
-          </li>
-        )}
-        {footer && (
-          <li>
-            {/* <i className='fas fa-footer' />  */}
-            {footer}
-          </li>
-        )}
+        {detail && <li className='text-left px-2'>{detail}</li>}
+        {footer && <li className='text-left px-2'>{footer}</li>}
       </ul>
-      <p>
-        <button className='btn btn-dark btn-sm' onClick={onEdit}>
+      <p className='p-2 text-right'>
+        <button className='btn btn-dark btn-sm ' onClick={onEdit}>
           Edit
         </button>
-        <button className='btn btn-danger btn-sm' onClick={onDelete}>
+        <button className='btn btn-danger btn-sm ' onClick={onDelete}>
           Delete
         </button>
       </p>

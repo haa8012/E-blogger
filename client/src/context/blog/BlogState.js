@@ -104,6 +104,17 @@ const BlogState = (props) => {
     }
   };
 
+  // Delete Blog Image
+  const deleteImage = async (key) => {
+    try {
+      await axios.delete(`/api/image-upload/${key}`);
+    } catch (err) {
+      dispatch({
+        type: BLOG_ERROR,
+        payload: err.response.msg,
+      });
+    }
+  };
   // Update BLOG
   const updateBlog = async (blog) => {
     const config = {
@@ -171,6 +182,7 @@ const BlogState = (props) => {
         error: state.error,
         addBlog,
         deleteBlog,
+        deleteImage,
         setCurrent,
         setFilePath,
         clearCurrent,

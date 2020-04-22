@@ -4,10 +4,12 @@ const multerS3 = require('multer-s3');
 const multer = require('multer');
 const path = require('path');
 const auth = require('../middleware/auth');
+// https://codeytek.com/file-or-image-uploads-on-amazon-web-services-aws-using-react-node-and-express-js-aws-sdk/
 // const awsConfig = require('../config/aws-config');
 // const config = require('config');
 
 const router = express.Router();
+const AWS_BUCKET = 'blogger-imageuploads';
 
 /**
  * PROFILE IMAGE STORING STARTS
@@ -15,7 +17,7 @@ const router = express.Router();
 const s3 = new aws.S3({
   accessKeyId: process.env.AWS_ACCESS_KEY,
   secretAccessKey: process.env.AWS_SECRET_ACCESS,
-  Bucket: 'blogger-imageuploads',
+  Bucket: AWS_BUCKET,
   region: 'us-east-1',
 });
 
@@ -25,7 +27,7 @@ const s3 = new aws.S3({
 const profileImgUpload = multer({
   storage: multerS3({
     s3: s3,
-    bucket: 'blogger-imageuploads',
+    bucket: AWS_BUCKET,
     acl: 'public-read',
     key: function (req, file, cb) {
       cb(
@@ -72,7 +74,7 @@ router.post('/image-upload', auth, (req, res) => {
   // console.log(process.env);
   profileImgUpload(req, res, (error) => {
     console.log('requestOkokok', req.file);
-    console.log('error', error);
+
     if (error) {
       console.log('errors', error);
       res.json({ error: error });
@@ -83,16 +85,37 @@ router.post('/image-upload', auth, (req, res) => {
         res.json('Error: No File Selected');
       } else {
         // If Success
-        const imageName = req.file.key;
-        const imageLocation = req.file.location;
-        // Save the file name into database into profile model
+        // const { key, location } = req.file;
+        const { key } = req.file;
+        const location = `https://${AWS_BUCKET}.s3.amazonaws.com/${key}`;
         res.json({
-          image: imageName,
-          location: imageLocation,
+          key,
+          location,
         });
       }
     }
   });
+});
+
+router.delete('/image-upload/:key', auth, async (req, res) => {
+  const deleteParam = {
+    Bucket: AWS_BUCKET,
+    Delete: {
+      Objects: [{ Key: req.params.key }],
+    },
+  };
+  try {
+    s3.deleteObjects(deleteParam, function (err, data) {
+      if (err) {
+        console.log(err, err.stack);
+      } else {
+        res.json({ status: 'success!', data });
+        console.log('delete', data);
+      }
+    });
+  } catch (err) {
+    console.log(err, err.stack);
+  }
 });
 
 /**
@@ -103,7 +126,7 @@ router.post('/image-upload', auth, (req, res) => {
 const uploadsBusinessGallery = multer({
   storage: multerS3({
     s3: s3,
-    bucket: 'blogger-imageuploads',
+    bucket: AWS_BUCKET,
     acl: 'public-read',
     key: function (req, file, cb) {
       cb(

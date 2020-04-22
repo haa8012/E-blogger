@@ -6,7 +6,13 @@ import axios from 'axios';
 const BlogForm = () => {
   const blogContext = useContext(BlogContext);
 
-  const { addBlog, updateBlog, clearCurrent, current } = blogContext;
+  const {
+    addBlog,
+    updateBlog,
+    clearCurrent,
+    deleteImage,
+    current,
+  } = blogContext;
 
   useEffect(() => {
     if (current !== null) {
@@ -34,9 +40,11 @@ const BlogForm = () => {
 
   const onChange = async (e) => {
     if (e.target.name === 'photo') {
+      /////////////////
+      // Upload to save server
+      /////////////////
       // const formData = new FormData();
       // formData.append('file', e.target.files[0]);
-
       // try {
       //   const res = await axios.post('/api/upload', formData, {
       //     headers: {
@@ -58,18 +66,25 @@ const BlogForm = () => {
       //   }
       // }
 
-      console.log(e.target.files[0]);
+      /////////////////
+      // Upload to AWS
+      /////////////////
       const data = new FormData();
       data.append('img', e.target.files[0], e.target.files[0].name);
       try {
-        const res = await axios.post('/api//image-upload', data, {
+        const res = await axios.post('/api/image-upload', data, {
           headers: {
             accept: 'application/json',
             'Accept-Language': 'en-US,en;q=0.8',
             'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
           },
         });
-        // console.log(res.data);
+
+        if (current && (image !== null || image != '')) {
+          console.log('replace image...');
+          deleteImage(image.split('/').pop());
+        }
+
         setBlog({
           ...blog,
           image: res.data.location,
