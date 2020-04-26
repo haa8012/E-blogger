@@ -1,15 +1,17 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import BlogContext from '../../context/blog/blogContext';
+import dateFormat from 'dateformat';
 
 const BlogItem = ({ blog }) => {
   const blogContext = useContext(BlogContext);
-  const { deleteBlog, setCurrent, clearCurrent } = blogContext;
+  const { deleteBlog, deleteImage, setCurrent, clearCurrent } = blogContext;
 
   const { _id, title, date, image, detail, footer, type } = blog;
 
   const onDelete = () => {
     deleteBlog(_id);
+    deleteImage(image.split('/').pop());
     clearCurrent();
   };
 
@@ -32,7 +34,7 @@ const BlogItem = ({ blog }) => {
           {type.charAt(0).toUpperCase() + type.slice(1)}
         </span>
       </h3>
-      <div className='text-left p-nt'>{date}</div>
+      <div className='text-left p-nt'>{dateFormat(date, 'mmmm, dd, yyyy')}</div>
       {image && <img src={image} alt='' />}
       <ul className='list'>
         {detail && <li className='text-left px-2'>{detail}</li>}

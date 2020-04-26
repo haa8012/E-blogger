@@ -326,6 +326,10 @@ img {
   border: #ccc solid 1px;
 }
 
+.bg-nav {
+  background-color: #67c9e5;
+}
+
 .round-img {
   border-radius: 50%;
 }
@@ -401,8 +405,8 @@ button {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 
   margin: 1.7rem 0;
-  /* background-color: #fff; */
-  background-color: var(--light-color);
+  background-color: #fff;
+  /* background-color: var(--light-color); */
 }
 
 .form-container h1,
@@ -429,9 +433,10 @@ table th {
   padding: 0.1rem 2rem;
   z-index: 1;
   width: 100%;
-  border-bottom: solid 1px var(--primary-color);
+  border-bottom: solid 1px rgb(170, 170, 170);
   opacity: 0.9;
   margin-bottom: 1rem;
+  padding: 15px;
 }
 
 .navbar ul {
@@ -439,13 +444,17 @@ table th {
 }
 
 .navbar a {
-  color: #fff;
+  color: rgb(3, 3, 3);
   padding: 0.45rem;
   margin: 0 0.25rem;
+  border-bottom: 3px solid transparent;
 }
 
 .navbar a:hover {
-  color: var(--light-color);
+  /* background-color: var(--primary-color); */
+  /* color: var(--light-color); */
+  color: #1592e6;
+  border-bottom: 3px #1592e6 solid;
 }
 
 .navbar .welcome span {

@@ -4,12 +4,18 @@ const multerS3 = require('multer-s3');
 const multer = require('multer');
 const path = require('path');
 const auth = require('../middleware/auth');
+const imagemin = require('imagemin');
+const mozjpeg = require('imagemin-mozjpeg');
+const sharp = require('sharp');
+const isJpg = require('is-jpg');
+const fs = require('fs');
+
 // https://codeytek.com/file-or-image-uploads-on-amazon-web-services-aws-using-react-node-and-express-js-aws-sdk/
+//https://www.udemy.com/course/mern-react-node-aws/
 // const awsConfig = require('../config/aws-config');
 // const config = require('config');
 
 const router = express.Router();
-const AWS_BUCKET = 'blogger-imageuploads';
 
 /**
  * PROFILE IMAGE STORING STARTS
@@ -17,32 +23,91 @@ const AWS_BUCKET = 'blogger-imageuploads';
 const s3 = new aws.S3({
   accessKeyId: process.env.AWS_ACCESS_KEY,
   secretAccessKey: process.env.AWS_SECRET_ACCESS,
-  Bucket: AWS_BUCKET,
+  Bucket: process.env.AWS_BUCKET,
   region: 'us-east-1',
 });
 
 /**
  * Single Upload
  */
+// const profileImgUpload = multer({
+//   storage: multerS3({
+//     s3: s3,
+//     bucket: AWS_BUCKET,
+//     acl: 'public-read',
+//     key: (req, file, cb) => {
+//       cb(
+//         null,
+//         path.basename(file.originalname, path.extname(file.originalname)) +
+//           '-' +
+//           Date.now() +
+//           path.extname(file.originalname)
+//       );
+//     },
+//   }),
+//   limits: { fileSize: 10000000 }, // In bytes: 2000000 bytes = 2 MB
+//   fileFilter: function (req, file, cb) {
+//     checkFileType(file, cb);
+//   },
+// }).single('img');
+
+/**
+ * Single Upload with image resize
+ */
 const profileImgUpload = multer({
   storage: multerS3({
     s3: s3,
-    bucket: AWS_BUCKET,
+    bucket: process.env.AWS_BUCKET,
     acl: 'public-read',
-    key: function (req, file, cb) {
+    limits: { fileSize: 2000000 }, // In bytes: 2000000 bytes = 2 MB
+    fileFilter: function (req, file, cb) {
+      checkFileType(file, cb);
+    },
+    key: (req, file, cb) => {
       cb(
         null,
         path.basename(file.originalname, path.extname(file.originalname)) +
-          '-' +
+          '-original-' +
           Date.now() +
           path.extname(file.originalname)
       );
     },
+    // shouldTransform: function (req, file, cb) {
+    //   cb(null, /^image/i.test(file.mimetype));
+    // },
+    // transforms: [
+    //   {
+    //     id: 'original',
+    //     key: (req, file, cb) => {
+    //       cb(
+    //         null,
+    //         path.basename(file.originalname, path.extname(file.originalname)) +
+    //           '-original-' +
+    //           Date.now() +
+    //           path.extname(file.originalname)
+    //       );
+    //     },
+    //     transform: function (req, file, cb) {
+    //       cb(null, sharp().resize(700, null).toFormat('jpeg'));
+    //     },
+    //   },
+    //   {
+    //     id: 'thumbnail',
+    //     key: (req, file, cb) => {
+    //       cb(
+    //         null,
+    //         path.basename(file.originalname, path.extname(file.originalname)) +
+    //           '-thumbnail-' +
+    //           Date.now() +
+    //           path.extname(file.originalname)
+    //       );
+    //     },
+    //     transform: function (req, file, cb) {
+    //       cb(null, sharp().resize(100, 100).toFormat('jpeg'));
+    //     },
+    //   },
+    // ],
   }),
-  limits: { fileSize: 2000000 }, // In bytes: 2000000 bytes = 2 MB
-  fileFilter: function (req, file, cb) {
-    checkFileType(file, cb);
-  },
 }).single('img');
 
 /**
@@ -71,7 +136,17 @@ function checkFileType(file, cb) {
  * @access public
  */
 router.post('/image-upload', auth, (req, res) => {
-  // console.log(process.env);
+  // if (req.file.size > 500000) {
+  //   sharp;
+  // }
+
+  // console.log('file uploaded: ', req.file);
+  // sharp(req.file).toBuffer((err, data, info) => {
+  //   console.log(data);
+  //   uploadBuffer(data);
+  // });
+  // const img = imgToBuffer(req.file);
+
   profileImgUpload(req, res, (error) => {
     console.log('requestOkokok', req.file);
 
@@ -87,7 +162,7 @@ router.post('/image-upload', auth, (req, res) => {
         // If Success
         // const { key, location } = req.file;
         const { key } = req.file;
-        const location = `https://${AWS_BUCKET}.s3.amazonaws.com/${key}`;
+        const location = `https://${process.env.AWS_BUCKET}.s3.amazonaws.com/${key}`;
         res.json({
           key,
           location,
@@ -99,7 +174,7 @@ router.post('/image-upload', auth, (req, res) => {
 
 router.delete('/image-upload/:key', auth, async (req, res) => {
   const deleteParam = {
-    Bucket: AWS_BUCKET,
+    Bucket: process.env.AWS_BUCKET,
     Delete: {
       Objects: [{ Key: req.params.key }],
     },
@@ -118,6 +193,48 @@ router.delete('/image-upload/:key', auth, async (req, res) => {
   }
 });
 
+//////////////////////////////////////////////
+//
+//////////////////////////////////////////////
+const imgToBuffer = (uploadedImage) => {
+  try {
+    img = fs.readFileSync(uploadedImage);
+    let str = img.toString('base64');
+    return Buffer.from(str, 'base64');
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const convertToJpg = async (input) => {
+  if (isJpg(input)) {
+    return input;
+  }
+
+  return sharp(input).jpeg().toBuffer();
+};
+
+const uploadBuffer = async (buffer) => {
+  const miniBuffer = await imagemin.buffer(buffer, {
+    plugins: [convertToJpg, mozjpeg({ quality: 85 })],
+  });
+
+  const Key = 'phot.jpg';
+
+  await s3
+    .upload({
+      Bucket: process.env.AWS_BUCKET,
+      Key,
+      Body: miniBuffer,
+    })
+    .promise();
+  console.log('uploaded to s3...');
+  return Key;
+};
+
+//////////////////////////////////////////////
+//
+//////////////////////////////////////////////
 /**
  * BUSINESS GALLERY IMAGES
  * MULTIPLE FILE UPLOADS
@@ -126,7 +243,7 @@ router.delete('/image-upload/:key', auth, async (req, res) => {
 const uploadsBusinessGallery = multer({
   storage: multerS3({
     s3: s3,
-    bucket: AWS_BUCKET,
+    bucket: process.env.AWS_BUCKET,
     acl: 'public-read',
     key: function (req, file, cb) {
       cb(

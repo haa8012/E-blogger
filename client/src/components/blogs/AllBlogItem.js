@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import dateFormat from 'dateformat';
 
 const AllBlogItem = ({ blog }) => {
   const { title, date, image, detail, footer } = blog;
@@ -7,7 +8,7 @@ const AllBlogItem = ({ blog }) => {
   return (
     <div className='card'>
       <h3 className='text-primary text-left p-nb'>{title} </h3>
-      <div className='text-left p-nt'>{date}</div>
+      <div className='text-left p-nt'>{dateFormat(date, 'mmmm, dd, yyyy')}</div>
       {image && <img src={image} alt='' />}
       <ul className='list'>
         {detail && <li className='text-left px-2'>{detail}</li>}

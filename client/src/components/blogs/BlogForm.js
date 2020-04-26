@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import BlogContext from '../../context/blog/blogContext';
-// import FileUpload from './FileUpload';
+
 import axios from 'axios';
 
 const BlogForm = () => {
@@ -41,32 +41,6 @@ const BlogForm = () => {
   const onChange = async (e) => {
     if (e.target.name === 'photo') {
       /////////////////
-      // Upload to save server
-      /////////////////
-      // const formData = new FormData();
-      // formData.append('file', e.target.files[0]);
-      // try {
-      //   const res = await axios.post('/api/upload', formData, {
-      //     headers: {
-      //       'Content-Type': 'multipart/form-data',
-      //     },
-      //   });
-
-      //   const { fileName, filePath } = res.data;
-      //   console.log(res);
-      //   setBlog({
-      //     ...blog,
-      //     image: filePath,
-      //   });
-      // } catch (err) {
-      //   if (err.response.status === 500) {
-      //     console.log('There was a problem with the server');
-      //   } else {
-      //     console.log(err.response.data.msg);
-      //   }
-      // }
-
-      /////////////////
       // Upload to AWS
       /////////////////
       const data = new FormData();
@@ -80,8 +54,8 @@ const BlogForm = () => {
           },
         });
 
-        if (current && (image !== null || image != '')) {
-          console.log('replace image...');
+        if (current && (image !== null || image !== '')) {
+          console.log('replacing image...');
           deleteImage(image.split('/').pop());
         }
 

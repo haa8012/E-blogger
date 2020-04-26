@@ -45,12 +45,12 @@ const Navbar = ({ title, icon }) => {
   );
 
   return (
-    <div className='navbar bg-primary'>
-      <h1>
+    <div className='navbar bg-light'>
+      <h3>
         <Link to='/'>
           <i className={icon} /> {title}
         </Link>
-      </h1>
+      </h3>
       <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
     </div>
   );
@@ -62,7 +62,7 @@ Navbar.propTypes = {
 };
 
 Navbar.defaultProps = {
-  title: 'Bloger',
+  title: "Jackie's Blogger",
   icon: 'fas fa-id-card-alt',
 };
 
