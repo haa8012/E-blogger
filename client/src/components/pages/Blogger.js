@@ -4,7 +4,7 @@ import BlogFilterAll from '../blogs/BlogFilterAll';
 
 function Blogger() {
   return (
-    <div>
+    <div className='my-2 py-3'>
       <BlogFilterAll />
       <AllBlogs />
     </div>

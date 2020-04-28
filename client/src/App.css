@@ -427,15 +427,16 @@ table th {
 
 /* Navbar */
 .navbar {
+  position: fixed;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.1rem 2rem;
-  z-index: 1;
+  /* z-index: 1; */
   width: 100%;
   border-bottom: solid 1px rgb(170, 170, 170);
   opacity: 0.9;
-  margin-bottom: 1rem;
+  margin-bottom: 10rem;
   padding: 15px;
 }
 
