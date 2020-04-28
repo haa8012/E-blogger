@@ -2,11 +2,19 @@ import React from 'react';
 
 const About = () => {
   return (
-    <div>
-      <h1>About This App</h1>
+    <div className='text-left'>
+      <h1 className='text-center'>About me</h1>
       <p className='my-1'></p>
-      <p className='bg-dark p'>
-        <strong>Version: </strong> 1.0.0
+      <p className='card p' style={{ padding: 40 }}>
+        <strong>Jackeline Campos </strong>
+
+        <p>
+          I am a freelance actress. I like blogging and sharing my life
+          experiences with the world, and this is the reason why I created this
+          blog. In my free time, I like to paint and color t-shirts. I studied
+          and worked previously in fashion design.
+        </p>
+        <div style={{}}></div>
       </p>
     </div>
   );

@@ -461,6 +461,10 @@ table th {
   margin-right: 0.6rem;
 }
 
+.nav-center {
+  margin: auto;
+  text-align: left;
+}
 /* Animation (Add After) */
 .item-enter {
   opacity: 0;

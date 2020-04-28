@@ -23,35 +23,50 @@ const Navbar = ({ title, icon }) => {
 
   const authLinks = (
     <Fragment>
-      <li>Hello {user && user.name}</li>
-      <li>
-        <a onClick={onLogout} href='#!'>
-          <i className='fas fa-sign-out-alt' />{' '}
-          <span className='hide-sm'>Logout</span>
-        </a>
-      </li>
+      <h3>
+        <Link to='/'> Edit Blogs {'    '}</Link>
+      </h3>
+
+      <ul>
+        <li>
+          Hello <span style={{ fontWeight: 700 }}>{user && user.name}</span>
+        </li>
+        <li>
+          <a onClick={onLogout} href='#!'>
+            {' '}
+            {'     '}
+            <i className='fas fa-sign-out-alt' />{' '}
+            <span className='hide-sm'>Logout</span>
+          </a>
+        </li>
+      </ul>
     </Fragment>
   );
 
   const guestLinks = (
     <Fragment>
-      <li>
-        <Link to='/register'>Register</Link>
-      </li>
-      <li>
-        <Link to='/login'>Login</Link>
-      </li>
+      <ul>
+        <li>
+          <Link to='/register'>Register</Link>
+        </li>
+        <li>
+          <Link to='/login'>Login</Link>
+        </li>
+      </ul>
     </Fragment>
   );
 
   return (
     <div className='navbar bg-light'>
       <h3>
-        <Link to='/'>
+        <Link to='/Blogger'>
           <i className={icon} /> {title}
         </Link>
+        <Link to='/blogger'>Blogs </Link>
+        <Link to='/About'>About </Link>
       </h3>
-      <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
+
+      {isAuthenticated ? authLinks : guestLinks}
     </div>
   );
 };
