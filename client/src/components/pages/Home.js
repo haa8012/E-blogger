@@ -5,7 +5,7 @@ import BlogFilter from '../blogs/BlogFilter';
 
 const Home = () => {
   return (
-    <div className='grid-2 my-3 py-3'>
+    <div className='grid-2'>
       <div>
         <BlogForm />
       </div>
