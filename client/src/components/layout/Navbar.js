@@ -88,6 +88,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
 import BlogContext from '../../context/blog/blogContext';
+import logo from './logo.png';
 
 const Navbar = ({ title, icon }) => {
   const authContext = useContext(AuthContext);
@@ -193,7 +194,20 @@ const Navbar = ({ title, icon }) => {
   return (
     <nav>
       <div className='logo'>
-        <h4>Jackie's Blogs</h4>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}
+        >
+          <img
+            src={logo}
+            style={{ color: 'white', height: 50, width: 40 }}
+            alt=''
+          />
+          <h4>Jackie's Blogs</h4>
+        </div>
       </div>
       <ul className='nav-links'>
         <li>
