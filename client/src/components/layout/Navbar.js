@@ -201,11 +201,12 @@ const Navbar = ({ title, icon }) => {
             alignItems: 'center',
           }}
         >
-          <img
+          <i className='fas fa-blog' style={{ color: 'white' }}></i>
+          {/* <img
             src={logo}
             style={{ color: 'white', height: 50, width: 40 }}
             alt=''
-          />
+          /> */}
           <h4>Jackie's Blogs</h4>
         </div>
       </div>

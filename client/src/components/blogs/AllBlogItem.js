@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import dateFormat from 'dateformat';
+import BlogContext from '../../context/blog/blogContext';
+import { Link } from 'react-router-dom';
 
 const AllBlogItem = ({ blog }) => {
+  const blogContext = useContext(BlogContext);
+  const { setCurrent } = blogContext;
+
   const { title, date, image, detail, footer } = blog;
 
   return (
@@ -11,9 +16,19 @@ const AllBlogItem = ({ blog }) => {
       <div className='text-left p-nt'>{dateFormat(date, 'mmmm, dd, yyyy')}</div>
       {image && <img src={image} alt='' />}
       <ul className='list'>
-        {detail && <li className='text-left px-2'>{detail}</li>}
-        {footer && <li className='text-left px-2'>{footer}</li>}
+        {detail && <p className='text-left px-1 detail'>{detail}</p>}
+        {footer && <li className='text-left px-1'>{footer}</li>}
       </ul>
+      <div className='p-2 text-left'>
+        <Link
+          to='/blog'
+          style={{ color: '#1976d2' }}
+          onClick={() => setCurrent(blog)}
+        >
+          Read More...
+        </Link>{' '}
+        {/* <i className='fas fa-book-open' style={{ color: '#1976d2' }}></i> */}
+      </div>
     </div>
   );
 };
