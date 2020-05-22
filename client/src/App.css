@@ -134,6 +134,7 @@ img {
 }
 .detail {
   width: 90%;
+  max-width: 700px;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;

@@ -47,7 +47,7 @@ const BlogDisplay = () => {
   const { title, date, image, detail, footer } = blog;
   const size = 25;
   const blogTitle = `Share ${String(window.location)}`;
-
+  console.log('location', window.location);
   return (
     <div className='card-full'>
       {' '}
@@ -57,19 +57,24 @@ const BlogDisplay = () => {
           <EmailShareButton subject={blogTitle}>
             <EmailIcon size={size} round={true} />
           </EmailShareButton>
-          <FacebookShareButton quote={blogTitle}>
+          <FacebookShareButton quote={blogTitle} url={String(window.location)}>
             <FacebookIcon size={size} round={true} />
           </FacebookShareButton>
-          <TwitterShareButton title={blogTitle}>
+          <TwitterShareButton title={blogTitle} url={String(window.location)}>
             <TwitterIcon size={size} round={true} />
           </TwitterShareButton>
-          <WhatsappShareButton title={blogTitle} separator=':: '>
+          <WhatsappShareButton
+            title={blogTitle}
+            separator=':: '
+            url={String(window.location)}
+          >
             <WhatsappIcon size={size} round={true} />
           </WhatsappShareButton>
           <LinkedinShareButton
             title={blogTitle}
             windowWidth={750}
             windowHeight={600}
+            url={String(window.location)}
           >
             <LinkedinIcon size={size} round={true} />
           </LinkedinShareButton>

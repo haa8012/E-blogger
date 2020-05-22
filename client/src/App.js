@@ -9,7 +9,6 @@ import Login from './components/auth/Login';
 import Alerts from './components/layout/Alerts';
 import PrivateRoute from './components/routing/PrivateRoute';
 import Home from './components/pages/Home';
-
 import BlogState from './context/blog/BlogState';
 import AuthState from './context/auth/AuthState';
 import AlertState from './context/alert/AlertState';
@@ -29,7 +28,7 @@ const App = () => {
                   <PrivateRoute exact path='/' component={Home} />
                   <Route exact path='/blogger' component={Blogger} />
                   <Route exact path='/about' component={About} />
-                  <Route exact path='/blog' component={Blog} />
+                  <Route exact path='/blog/:blog' component={Blog} />
                   <Route exact path='/register' component={Register} />
                   <Route exact path='/login' component={Login} />
                 </Switch>
