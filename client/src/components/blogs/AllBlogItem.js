@@ -21,7 +21,7 @@ const AllBlogItem = ({ blog }) => {
       </ul>
       <div className='p-2 text-left'>
         <Link
-          to={`/blog/blogpost`} //${title}`}
+          to={`/blog/${title}`}
           style={{ color: '#1976d2' }}
           onClick={() => setCurrent(blog)}
         >
