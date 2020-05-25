@@ -1,4 +1,5 @@
 export const GET_BLOGS = 'GET_BLOGS';
+export const GET_BLOG = 'GET_BLOG';
 export const GET_ALLBLOGS = 'GET_ALLBLOGS';
 export const ADD_BLOG = 'ADD_BLOG';
 export const DELETE_BLOG = 'DELETE_BLOG';

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
-import Blogger from './components/pages/Blogger';
+import Blogs from './components/pages/Blogs';
 import Blog from './components/pages/Blog';
 import About from './components/pages/About';
 import Register from './components/auth/Register';
@@ -26,9 +26,9 @@ const App = () => {
                 <Alerts />
                 <Switch>
                   <PrivateRoute exact path='/' component={Home} />
-                  <Route exact path='/blogger' component={Blogger} />
+                  <Route exact path='/blogs' component={Blogs} />
+                  <Route path='/blogs/:id' component={Blog} />
                   <Route exact path='/about' component={About} />
-                  <Route exact path='/blog/:blog' component={Blog} />
                   <Route exact path='/register' component={Register} />
                   <Route exact path='/login' component={Login} />
                 </Switch>

@@ -24,6 +24,22 @@ router.get('/all', async (req, res) => {
 });
 
 // @route     GET api/blogs
+// @desc      Get a single blog
+// @access    Public
+router.get('/:id', async (req, res) => {
+  try {
+    const blog = await Blog.findById(req.params.id);
+
+    if (!blog) return res.status(404).json({ msg: 'blog not found' });
+
+    res.json(blog);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route     GET api/blogs
 // @desc      Get all user's blogs
 // @access    Private
 router.get('/', auth, async (req, res) => {

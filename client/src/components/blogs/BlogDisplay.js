@@ -1,42 +1,20 @@
 import BlogContext from '../../context/blog/blogContext';
 import PropTypes from 'prop-types';
 import dateFormat from 'dateformat';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  EmailShareButton,
-  FacebookShareButton,
-  TwitterShareButton,
-  LinkedinShareButton,
-  WhatsappShareButton,
-  PinterestShareButton,
-  EmailIcon,
-  FacebookIcon,
-  TwitterIcon,
-  LinkedinIcon,
-  WhatsappIcon,
-  PinterestIcon,
-} from 'react-share';
+import { useParams } from 'react-router';
+import SocialShare from './SocialShare';
+
+import axios from 'axios';
 
 const BlogDisplay = () => {
-  const blogContext = useContext(BlogContext);
-  const { current, clearCurrent } = blogContext;
-
+  const { id } = useParams();
   useEffect(() => {
-    if (current !== null) {
-      setBlog(current);
-    } else {
-      setBlog({
-        title: '',
-        date: '',
-        image: '',
-        detail: '',
-        footer: '',
-      });
-    }
-  }, [blogContext, current]);
+    getBlog(id);
+  }, []);
 
-  const [blog, setBlog] = useState({
+  const [currBlog, setCurrBlog] = useState({
     title: '',
     date: '',
     image: '',
@@ -44,49 +22,21 @@ const BlogDisplay = () => {
     footer: '',
   });
 
-  const { title, date, image, detail, footer } = blog;
-  const size = 25;
-  const blogTitle = `Share ${String(window.location)}`;
-  console.log('location', window.location);
+  const getBlog = async (id) => {
+    try {
+      const res = await axios.get(`/api/blogs/${id}`);
+      setCurrBlog(res.data);
+    } catch (err) {
+      console.log('error', err);
+    }
+  };
+
+  const { title, date, image, detail, footer } = currBlog;
   return (
     <div className='card-full'>
-      {' '}
       <div className='share-banner'>
         <h3 className='text-primary text-left p-nb'> {title} </h3>
-        <div>
-          <EmailShareButton subject={blogTitle}>
-            <EmailIcon size={size} round={true} />
-          </EmailShareButton>
-          <FacebookShareButton quote={blogTitle} url={String(window.location)}>
-            <FacebookIcon size={size} round={true} />
-          </FacebookShareButton>
-          <TwitterShareButton title={blogTitle} url={String(window.location)}>
-            <TwitterIcon size={size} round={true} />
-          </TwitterShareButton>
-          <WhatsappShareButton
-            title={blogTitle}
-            separator=':: '
-            url={String(window.location)}
-          >
-            <WhatsappIcon size={size} round={true} />
-          </WhatsappShareButton>
-          <LinkedinShareButton
-            title={blogTitle}
-            windowWidth={750}
-            windowHeight={600}
-            url={String(window.location)}
-          >
-            <LinkedinIcon size={size} round={true} />
-          </LinkedinShareButton>
-          <PinterestShareButton
-            url={String(window.location)}
-            media={`${image}`}
-            windowWidth={1000}
-            windowHeight={730}
-          >
-            <PinterestIcon size={size} round={true} />
-          </PinterestShareButton>
-        </div>
+        <SocialShare image={image} />
       </div>
       <div className='text-left p-nt'>{dateFormat(date, 'mmmm, dd, yyyy')}</div>
       {image && <img src={image} alt='' />}
@@ -96,8 +46,8 @@ const BlogDisplay = () => {
       </ul>
       <div className='p-2'>
         <Link
-          to='/blogger'
-          onClick={() => clearCurrent()}
+          to='/blogs'
+          // onClick={() => clearCurrent()}
           style={{ color: '#1976d2' }}
         >
           Return Home
@@ -106,10 +56,6 @@ const BlogDisplay = () => {
       </div>
     </div>
   );
-};
-
-BlogDisplay.propTypes = {
-  blog: PropTypes.object.isRequired,
 };
 
 export default BlogDisplay;

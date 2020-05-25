@@ -2,7 +2,7 @@ import React from 'react';
 import AllBlogs from '../blogs/AllBlogs';
 import BlogFilterAll from '../blogs/BlogFilterAll';
 
-function Blogger() {
+function Blogs() {
   return (
     <div className=''>
       <BlogFilterAll />
@@ -11,4 +11,4 @@ function Blogger() {
   );
 }
 
-export default Blogger;
+export default Blogs;

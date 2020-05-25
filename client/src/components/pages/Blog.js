@@ -1,7 +1,7 @@
 import React from 'react';
 import BlogDisplay from '../blogs/BlogDisplay';
 
-function Blog(blog) {
+function Blog() {
   return (
     <div className=''>
       <BlogDisplay />

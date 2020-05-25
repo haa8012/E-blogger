@@ -8,8 +8,7 @@ const AllBlogItem = ({ blog }) => {
   const blogContext = useContext(BlogContext);
   const { setCurrent } = blogContext;
 
-  const { title, date, image, detail, footer } = blog;
-
+  const { _id, title, date, image, detail, footer } = blog;
   return (
     <div className='card'>
       <h3 className='text-primary text-left p-nb'>{title} </h3>
@@ -21,9 +20,9 @@ const AllBlogItem = ({ blog }) => {
       </ul>
       <div className='p-2 text-left'>
         <Link
-          to={`/blog/${title}`}
+          to={`/blogs/${_id}`}
           style={{ color: '#1976d2' }}
-          onClick={() => setCurrent(blog)}
+          // onClick={() => setCurrent(blog)}
         >
           Read More...
         </Link>{' '}

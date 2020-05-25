@@ -212,10 +212,10 @@ const Navbar = ({ title, icon }) => {
       </div>
       <ul className='nav-links'>
         <li>
-          <Link to='/Blogger'>Home </Link>
+          <Link to='/'>Home </Link>
         </li>
         <li>
-          <Link to='/blogger'>Blogs </Link>
+          <Link to='/Blogs'>Blogs </Link>
         </li>
         <li>
           <Link to='/About'>About </Link>

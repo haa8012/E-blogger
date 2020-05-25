@@ -1,5 +1,6 @@
 import {
   GET_BLOGS,
+  GET_BLOG,
   GET_ALLBLOGS,
   ADD_BLOG,
   DELETE_BLOG,
@@ -20,6 +21,12 @@ export default (state, action) => {
       return {
         ...state,
         blogs: action.payload,
+        loading: false,
+      };
+    case GET_BLOG:
+      return {
+        ...state,
+        blog: action.payload,
         loading: false,
       };
     case GET_ALLBLOGS:

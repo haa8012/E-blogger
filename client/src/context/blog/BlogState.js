@@ -4,6 +4,7 @@ import BlogContext from './blogContext';
 import blogReducer from './blogReducer';
 import {
   GET_BLOGS,
+  GET_BLOG,
   GET_ALLBLOGS,
   ADD_BLOG,
   DELETE_BLOG,
@@ -20,6 +21,7 @@ import {
 
 const BlogState = (props) => {
   const initialState = {
+    blog: null,
     blogs: null,
     allBlogs: null,
     current: null,
@@ -37,6 +39,23 @@ const BlogState = (props) => {
 
       dispatch({
         type: GET_BLOGS,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: BLOG_ERROR,
+        payload: err.response.msg,
+      });
+    }
+  };
+
+  // Get Blog
+  const getBlog = async (id) => {
+    try {
+      const res = await axios.get(`/api/blogs/${id}`);
+
+      dispatch({
+        type: GET_BLOG,
         payload: res.data,
       });
     } catch (err) {
@@ -173,6 +192,7 @@ const BlogState = (props) => {
   return (
     <BlogContext.Provider
       value={{
+        blog: state.blog,
         blogs: state.blogs,
         allBlogs: state.allBlogs,
         current: state.current,
@@ -190,6 +210,7 @@ const BlogState = (props) => {
         filterBlogs,
         filterAllBlogs,
         clearFilter,
+        getBlog,
         getBlogs,
         getAllBlogs,
         clearBlogs,
