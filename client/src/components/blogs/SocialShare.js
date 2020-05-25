@@ -14,10 +14,10 @@ import {
   PinterestIcon,
 } from 'react-share';
 
-const socialShare = ({ image }) => {
+const socialShare = ({ image, title }) => {
   const size = 28;
 
-  const blogTitle = `Share ${String(window.location)}`;
+  const blogTitle = title;
   return (
     <div>
       <EmailShareButton subject={blogTitle}>

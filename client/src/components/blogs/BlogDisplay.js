@@ -36,7 +36,7 @@ const BlogDisplay = () => {
     <div className='card-full'>
       <div className='share-banner'>
         <h3 className='text-primary text-left p-nb'> {title} </h3>
-        <SocialShare image={image} />
+        <SocialShare image={image} title={title} />
       </div>
       <div className='text-left p-nt'>{dateFormat(date, 'mmmm, dd, yyyy')}</div>
       {image && <img src={image} alt='' />}
