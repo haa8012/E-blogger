@@ -5,6 +5,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router';
 import SocialShare from './SocialShare';
+import { Helmet } from 'react-helmet';
+import thump from '../layout/logo.png';
 
 import axios from 'axios';
 
@@ -34,6 +36,10 @@ const BlogDisplay = () => {
   const { title, date, image, detail, footer } = currBlog;
   return (
     <div className='card-full'>
+      <Helmet>
+        <meta property='og:image' content={thump} />
+        {/* <meta property="og:image:secure_url" content="your-image.jpg"/> */}
+      </Helmet>
       <div className='share-banner'>
         <h3 className='text-primary text-left p-nb'> {title} </h3>
         <SocialShare image={image} title={title} />
