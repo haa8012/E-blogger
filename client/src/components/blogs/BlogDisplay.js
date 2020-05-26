@@ -37,7 +37,10 @@ const BlogDisplay = () => {
   return (
     <div className='card-full'>
       <Helmet>
-        <meta property='og:image' content={thump} />
+        <meta
+          property='og:image'
+          content='https://blogger-imageuploads.s3.amazonaws.com/667b3893a35aa0a1e429a052aeaf7e77--allah-calligraphy-sufi.jpg'
+        />
         <meta property='og:title' content={title} />
         <meta
           property='og:description'
