@@ -41,6 +41,10 @@ const BlogDisplay = () => {
           property='og:image'
           content='https://blogger-imageuploads.s3.amazonaws.com/thump-original-1590455951204.jpg'
         />
+        <meta
+          property='og:image:secure_url'
+          content='https://blogger-imageuploads.s3.amazonaws.com/thump-original-1590455951204.jpg'
+        />
         <meta property='og:title' content={title} />
         <meta property='og:type' content='article' />
         <meta
