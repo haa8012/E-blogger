@@ -38,7 +38,12 @@ const BlogDisplay = () => {
     <div className='card-full'>
       <Helmet>
         <meta property='og:image' content={thump} />
-        {/* <meta property="og:image:secure_url" content="your-image.jpg"/> */}
+        <meta property='og:title' content={title} />
+        <meta
+          property='og:description'
+          content='Description that will show in the preview'
+        />
+        <meta property='og:url' content={String(window.location)} />
       </Helmet>
       <div className='share-banner'>
         <h3 className='text-primary text-left p-nb'> {title} </h3>
