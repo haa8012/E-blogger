@@ -39,9 +39,10 @@ const BlogDisplay = () => {
       <Helmet>
         <meta
           property='og:image'
-          content='https://blogger-imageuploads.s3.amazonaws.com/667b3893a35aa0a1e429a052aeaf7e77--allah-calligraphy-sufi.jpg'
+          content='https://blogger-imageuploads.s3.amazonaws.com/thump-original-1590455951204.jpg'
         />
         <meta property='og:title' content={title} />
+        <meta property='og:type' content='article' />
         <meta
           property='og:description'
           content='Description that will show in the preview'
