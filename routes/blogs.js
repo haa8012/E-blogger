@@ -92,7 +92,7 @@ router.post(
 // @desc      Update blogs
 // @access    Private
 router.put('/:id', auth, async (req, res) => {
-  const { title, image, detail, footer, type } = req.body;
+  const { title, image, detail, footer, type, likes } = req.body;
 
   // Build blog object
   const blogFields = {};
@@ -101,6 +101,7 @@ router.put('/:id', auth, async (req, res) => {
   if (detail) blogFields.detail = detail;
   if (footer) blogFields.footer = footer;
   if (type) blogFields.type = type;
+  if (likes) blogFields.likes = likes;
 
   try {
     let blog = await Blog.findById(req.params.id);

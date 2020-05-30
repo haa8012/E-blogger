@@ -8,7 +8,7 @@ const AllBlogItem = ({ blog }) => {
   const blogContext = useContext(BlogContext);
   const { setCurrent } = blogContext;
 
-  const { _id, title, date, image, detail, footer } = blog;
+  const { _id, title, date, image, detail, footer, likes } = blog;
   return (
     <div className='card'>
       <h3 className='text-primary text-left p-nb'>{title} </h3>
