@@ -7,11 +7,11 @@ const BlogSchema = mongoose.Schema({
   },
   title: {
     type: String,
-    require: true,
+    required: true,
   },
   detail: {
     type: String,
-    require: true,
+    required: true,
   },
   footer: {
     type: String,
