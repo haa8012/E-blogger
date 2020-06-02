@@ -34,7 +34,9 @@ const BlogItem = ({ blog }) => {
           {type.charAt(0).toUpperCase() + type.slice(1)}
         </span>
       </h3>
-      <div className='text-left p-nt'>{dateFormat(date, 'mmmm, dd, yyyy')}</div>
+      <div className='text-left p-nt' style={{ fontSize: '.5rem' }}>
+        {dateFormat(date, 'mmmm, dd, yyyy')}
+      </div>
       {image && <img src={image} alt='' />}
       <ul className='list'>
         {detail && <li className='text-left px-2'>{detail}</li>}

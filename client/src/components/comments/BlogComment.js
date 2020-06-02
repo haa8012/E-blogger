@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, Fragment } from 'react';
 import UserContext from '../../context/auth/authContext';
 import CommentContext from '../../context/comment/commentContext';
+import dateFormat from 'dateformat';
 
 function BlogComment({ comment }) {
   const userContext = useContext(UserContext);
@@ -15,7 +16,7 @@ function BlogComment({ comment }) {
     deleteComment,
   } = commentContext;
 
-  const { content, _id } = comment;
+  const { content, _id, date } = comment;
 
   const onDelete = () => {
     deleteComment(_id);
@@ -29,10 +30,13 @@ function BlogComment({ comment }) {
   console.log('_id', _id);
   return (
     <div className='comment' key={_id}>
-      {content}
+      <div className='text-left' style={{ fontSize: '12px', color: '#505050' }}>
+        {dateFormat(date, 'mmmm, dd, yyyy')}
+      </div>
+      <p className='text-left'> {content}</p>
 
       {user && (
-        <p className='p-2 text-right'>
+        <p className='p-1 text-right'>
           <i
             className='far fa-edit'
             style={{ color: '', margin: 10 }}

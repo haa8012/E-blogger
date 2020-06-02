@@ -27,11 +27,7 @@ function BlogComments({ id }) {
       <CommentForm id={id} />
       <div className='comment-container'>
         {blogComments != null ? (
-          blogComments.map((comment) => (
-            <div>
-              <BlogComment comment={comment} />
-            </div>
-          ))
+          blogComments.map((comment) => <BlogComment comment={comment} />)
         ) : (
           <div></div>
         )}

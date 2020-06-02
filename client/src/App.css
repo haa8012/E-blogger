@@ -145,17 +145,19 @@ img {
 }
 
 .comment-container {
-  width: 90%;
-  max-width: 690px;
+  /* width: 90%; */
+  /* max-width: 690px; */
   /* margin: 1rem; */
 }
 .comment {
-  margin: 0.5rem;
+  margin: 1rem;
   border: 1px solid #eee;
   border-radius: 5px;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding: 0.5rem;
+  /* padding-top: 0.5rem;*/
+  padding-bottom: 0;
 }
+
 .share-banner {
   display: flex;
   justify-content: space-between;
