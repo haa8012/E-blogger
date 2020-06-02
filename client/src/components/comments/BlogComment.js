@@ -9,12 +9,7 @@ function BlogComment({ comment }) {
 
   const commentContext = useContext(CommentContext);
 
-  const {
-    getComments,
-    loading,
-    setCurrentComment,
-    deleteComment,
-  } = commentContext;
+  const { setCurrentComment, deleteComment } = commentContext;
 
   const { content, _id, date } = comment;
 
@@ -26,8 +21,10 @@ function BlogComment({ comment }) {
   const onEdit = () => {
     setCurrentComment(comment);
   };
-
-  console.log('_id', _id);
+  //   if (user._id === comment.user) {
+  console.log('user: ', user);
+  console.log('comment:', comment);
+  //   }
   return (
     <div className='comment' key={_id}>
       <div className='text-left' style={{ fontSize: '12px', color: '#505050' }}>
@@ -35,7 +32,7 @@ function BlogComment({ comment }) {
       </div>
       <p className='text-left'> {content}</p>
 
-      {user && (
+      {user && user._id === comment.user && (
         <p className='p-1 text-right'>
           <i
             className='far fa-edit'

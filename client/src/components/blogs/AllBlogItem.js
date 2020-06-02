@@ -18,7 +18,7 @@ const AllBlogItem = ({ blog }) => {
         {detail && <p className='text-left px-1 detail'>{detail}</p>}
         {footer && <li className='text-left px-1'>{footer}</li>}
       </ul>
-      <div className='p-2 text-left'>
+      <div className='p-2 text-right' style={{ marginTop: 30 }}>
         <Link
           to={`/blogs/${_id}`}
           style={{ color: '#1976d2' }}
