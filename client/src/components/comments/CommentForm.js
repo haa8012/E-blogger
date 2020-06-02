@@ -7,7 +7,7 @@ function CommentForm({ id }) {
     addComment,
     currentComment,
     updateComment,
-    setCurrentComment,
+    clearCurrentComment,
   } = commentContext;
 
   useEffect(() => {
@@ -34,24 +34,35 @@ function CommentForm({ id }) {
     } else {
       updateComment(cmnt);
     }
+    clearAll();
   };
-
+  const clearAll = () => {
+    clearCurrentComment();
+  };
   const { content } = cmnt;
 
   return (
     <div
       style={{
         background: '#eee',
-        padding: 20,
+        padding: 10,
         margin: 10,
         borderRadius: 5,
         border: '1px dashed #c7c7c7',
       }}
     >
-      <input type='text' name='content' value={content} onChange={onChange} />
-      <button className='btn btn-dark btn-block' onClick={onSubmit}>
+      <form onSubmit={onSubmit}>
+        <input type='text' name='content' value={content} onChange={onChange} />
+        <input
+          type='submit'
+          value={currentComment ? 'Update Comment' : 'Add Comment'}
+          className='btn btn-primary btn-block'
+        />
+
+        {/* <button className='btn btn-dark btn-block' onClick={onSubmit}>
         Add Comment
-      </button>
+      </button> */}
+      </form>
     </div>
   );
 }

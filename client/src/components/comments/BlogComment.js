@@ -33,7 +33,7 @@ function BlogComment({ comment }) {
       <p className='text-left'> {content}</p>
 
       {user && user._id === comment.user && (
-        <p className='p-1 text-right'>
+        <p className='text-right'>
           <i
             className='far fa-edit'
             style={{ color: '', margin: 10 }}
