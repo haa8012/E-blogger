@@ -40,14 +40,26 @@ const BlogItem = ({ blog }) => {
         {detail && <li className='text-left px-2'>{detail}</li>}
         {footer && <li className='text-left px-2'>{footer}</li>}
       </ul>
-      <p className='p-2 text-right'>
+      <p className='text-right'>
+        <i
+          className='far fa-edit'
+          style={{ color: '', margin: 10 }}
+          onClick={onEdit}
+        ></i>
+        <i
+          className='far fa-trash-alt'
+          style={{ color: 'red', margin: 10 }}
+          onClick={onDelete}
+        ></i>
+      </p>
+      {/* <p className='p-2 text-right'>
         <button className='btn btn-dark btn-sm ' onClick={onEdit}>
           Edit
         </button>
         <button className='btn btn-danger btn-sm ' onClick={onDelete}>
           Delete
         </button>
-      </p>
+      </p> */}
     </div>
   );
 };
