@@ -40,7 +40,7 @@ const BlogItem = ({ blog }) => {
         {detail && <li className='text-left px-2'>{detail}</li>}
         {footer && <li className='text-left px-2'>{footer}</li>}
       </ul>
-      <p className='text-right'>
+      <p className='p-1 text-right'>
         <i
           className='far fa-edit'
           style={{ color: '', margin: 10 }}
