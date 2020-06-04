@@ -1,8 +1,15 @@
 import React, { useState, useContext, useEffect } from 'react';
+import UserContext from '../../context/auth/authContext';
 import CommentContext from '../../context/comment/commentContext';
+import { Link, useHistory } from 'react-router-dom';
 
 function CommentForm({ id }) {
+  const userContext = useContext(UserContext);
+  const { user } = userContext;
+  const history = useHistory();
+
   const commentContext = useContext(CommentContext);
+
   const {
     addComment,
     currentComment,
@@ -28,6 +35,10 @@ function CommentForm({ id }) {
   };
   const onSubmit = (e) => {
     e.preventDefault();
+    if (!user) {
+      console.log('user not logged in ');
+      history.push('/login');
+    }
 
     if (currentComment === null) {
       addComment(cmnt);

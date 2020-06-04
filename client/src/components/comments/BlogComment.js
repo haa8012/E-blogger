@@ -22,8 +22,8 @@ function BlogComment({ comment }) {
     setCurrentComment(comment);
   };
   //   if (user._id === comment.user) {
-  console.log('user: ', user);
-  console.log('comment:', comment);
+  //   console.log('user: ', user);
+  //   console.log('comment:', comment);
   //   }
   return (
     <div className='comment' key={_id}>
