@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import BlogContext from '../../context/blog/blogContext';
+import Compressor from 'compressorjs';
 
 import axios from 'axios';
 
@@ -43,26 +44,47 @@ const BlogForm = () => {
       /////////////////
       // Upload to AWS
       /////////////////
-      const data = new FormData();
-      data.append('img', e.target.files[0], e.target.files[0].name);
+
       try {
-        const res = await axios.post('/api/image-upload', data, {
-          headers: {
-            accept: 'application/json',
-            'Accept-Language': 'en-US,en;q=0.8',
-            'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
+        const file = e.target.files[0];
+
+        new Compressor(file, {
+          quality: 0.6,
+          width: 700,
+          async success(result) {
+            const data = new FormData();
+            // The third parameter is required for server
+
+            data.append('img', result, result.name);
+            // Send the compressed image file to server with XMLHttpRequest.
+            // axios.post('/path/to/upload', data).then(() => {
+            //   console.log('Upload success');
+            // });
+
+            const res = await axios.post('/api/image-upload', data, {
+              headers: {
+                accept: 'application/json',
+                'Accept-Language': 'en-US,en;q=0.8',
+                'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
+              },
+            });
+
+            if (current && (image !== null || image !== '')) {
+              console.log('replacing image...');
+              deleteImage(image.split('/').pop());
+            }
+
+            setBlog({
+              ...blog,
+              image: res.data.location,
+            });
+          },
+          error(err) {
+            console.log(err.message);
           },
         });
-
-        if (current && (image !== null || image !== '')) {
-          console.log('replacing image...');
-          deleteImage(image.split('/').pop());
-        }
-
-        setBlog({
-          ...blog,
-          image: res.data.location,
-        });
+        // const data = new FormData();
+        // data.append('img', file, file.name);
       } catch (err) {
         if (err.response.status === 500) {
           console.log('There was a problem with the server');

@@ -59,7 +59,7 @@ const profileImgUpload = multer({
     s3: s3,
     bucket: process.env.AWS_BUCKET,
     acl: 'public-read',
-    limits: { fileSize: 2000000 }, // In bytes: 2000000 bytes = 2 MB
+    limits: { fileSize: 20000000 }, // In bytes: 2000000 bytes = 2 MB
     fileFilter: function (req, file, cb) {
       checkFileType(file, cb);
     },
@@ -255,7 +255,7 @@ const uploadsBusinessGallery = multer({
       );
     },
   }),
-  limits: { fileSize: 10000000 }, // In bytes: 2000000 bytes = 2 MB
+  limits: { fileSize: 200000000 }, // In bytes: 2000000 bytes = 2 MB
   fileFilter: function (req, file, cb) {
     checkFileType(file, cb);
   },
