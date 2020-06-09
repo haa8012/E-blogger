@@ -2,16 +2,30 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import BlogContext from '../../context/blog/blogContext';
 import dateFormat from 'dateformat';
+import parse from 'html-react-parser';
 
 const BlogItem = ({ blog }) => {
   const blogContext = useContext(BlogContext);
   const { deleteBlog, deleteImage, setCurrent, clearCurrent } = blogContext;
 
-  const { _id, title, date, image, detail, footer, type } = blog;
+  const {
+    _id,
+    title,
+    date,
+    image,
+    detail,
+    footer,
+    type,
+    images,
+    blogContent,
+  } = blog;
 
   const onDelete = () => {
     deleteBlog(_id);
-    deleteImage(image.split('/').pop());
+    // deleteImage(image.split('/').pop());
+    images.forEach((img) => {
+      deleteImage(img.split('/').pop());
+    });
     clearCurrent();
   };
 
@@ -37,6 +51,7 @@ const BlogItem = ({ blog }) => {
       <div className='text-left p-nt'>{dateFormat(date, 'mmmm, dd, yyyy')}</div>
       {image && <img src={image} alt='' />}
       <ul className='list'>
+        {blogContent && parse(blogContent)}
         {detail && <li className='text-left px-2'>{detail}</li>}
         {footer && <li className='text-left px-2'>{footer}</li>}
       </ul>
@@ -52,6 +67,7 @@ const BlogItem = ({ blog }) => {
           onClick={onDelete}
         ></i>
       </p>
+
       {/* <p className='p-2 text-right'>
         <button className='btn btn-dark btn-sm ' onClick={onEdit}>
           Edit
