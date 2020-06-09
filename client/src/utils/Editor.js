@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import ReactQuill, { Quill } from 'react-quill';
-import { set } from 'mongoose';
 import PropTypes from 'prop-types';
 import ImageUploader from 'quill-image-uploader';
 import Compressor from 'compressorjs';

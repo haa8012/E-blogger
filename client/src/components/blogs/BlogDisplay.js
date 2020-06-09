@@ -10,6 +10,7 @@ import { Helmet } from 'react-helmet';
 import thump from '../layout/logo.png';
 import clap from '../layout/clap.svg';
 import BlogComments from '../comments/BlogComments';
+import parse from 'html-react-parser';
 
 import axios from 'axios';
 
@@ -47,7 +48,7 @@ const BlogDisplay = () => {
     }
   };
 
-  const { title, date, image, detail, footer, likes } = currBlog;
+  const { title, date, image, detail, footer, likes, blogContent } = currBlog;
   return (
     <div className='card-full'>
       <Helmet>
@@ -74,6 +75,7 @@ const BlogDisplay = () => {
       <div className='text-left p-nt'>{dateFormat(date, 'mmmm, dd, yyyy')}</div>
       {image && <img src={image} alt='' />}
       <ul className='list'>
+        {blogContent && parse(blogContent)}
         {detail && <li className='text-left px-2'>{detail}</li>}
         {footer && <li className='text-left px-2'>{footer}</li>}
       </ul>
