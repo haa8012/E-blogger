@@ -55,7 +55,7 @@ function CommentForm({ id }) {
   return (
     <div
       style={{
-        background: '#eee',
+        background: '#f3f3f3',
         padding: 10,
         margin: 10,
         borderRadius: 5,
