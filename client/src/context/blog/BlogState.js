@@ -164,6 +164,7 @@ const BlogState = (props) => {
 
   // Set Current Blog
   const setCurrent = (blog) => {
+    console.log('current Blog is: ', blog);
     dispatch({ type: SET_CURRENT, payload: blog });
   };
 

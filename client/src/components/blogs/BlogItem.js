@@ -16,21 +16,27 @@ const BlogItem = ({ blog }) => {
     detail,
     footer,
     type,
-    images,
+    // images,
     blogContent,
   } = blog;
 
   const onDelete = () => {
     deleteBlog(_id);
     // deleteImage(image.split('/').pop());
-    images.forEach((img) => {
-      deleteImage(img.split('/').pop());
-    });
+    // images.forEach((img) => {
+    //   deleteImage(img.split('/').pop());
+    // });
     clearCurrent();
   };
 
   const onEdit = () => {
-    setCurrent(blog);
+    console.log('before set current blog:', blog);
+    try {
+      setCurrent(blog);
+    } catch (error) {
+      console.log('could not set current blog: ', error);
+    }
+
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
   };
