@@ -22,7 +22,7 @@ const AllBlogItem = ({ blog }) => {
       <div className='text-left p-nt'>{dateFormat(date, 'mmmm, dd, yyyy')}</div>
       {image && <img src={image} alt='' />}
       <ul className='list'>
-        {blogContent && parse(blogContent)}
+        {blogContent && <div>{parse(blogContent)}</div>}
         {detail && <p className='text-left px-1 detail'>{detail}</p>}
         {footer && <li className='text-left px-1'>{footer}</li>}
       </ul>

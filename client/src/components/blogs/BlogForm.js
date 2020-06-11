@@ -351,13 +351,8 @@ const BlogForm = () => {
     }
   };
   const onEditorChange = (html) => {
-    // console.log('reado for an update...', blog);
-    if (current) {
-      // setBlog({ ...current, blogContent: html });
-      // setBlog(current);
-    } else {
-    }
-    setBlog({ ...blog, blogContent: html });
+    // console.log('inside Editor Blog: ', blog, 'current: ', current);
+    setBlog({ ...blog, blogContent: String(html) });
   };
 
   const onSubmit = (e) => {
