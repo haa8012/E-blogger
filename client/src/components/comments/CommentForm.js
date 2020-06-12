@@ -26,7 +26,7 @@ function CommentForm({ id }) {
         content: '',
       });
     }
-  }, [currentComment]);
+  }, [commentContext, currentComment]);
 
   const [cmnt, setCmnt] = useState({ id: id, content: '' });
 
