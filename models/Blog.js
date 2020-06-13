@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const imageSchema = mongoose.Schema({ image: String });
 const BlogSchema = mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -7,11 +7,11 @@ const BlogSchema = mongoose.Schema({
   },
   title: {
     type: String,
-    required: true,
+    required: false,
   },
   detail: {
     type: String,
-    required: true,
+    required: false,
   },
   footer: {
     type: String,
@@ -31,6 +31,11 @@ const BlogSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
+  blogContent: {
+    type: String,
+    required: false,
+  },
+  // images: [imageSchema],
 });
 
 module.exports = mongoose.model('blog', BlogSchema);

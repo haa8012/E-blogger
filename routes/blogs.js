@@ -66,7 +66,15 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { title, image, detail, footer, type } = req.body;
+    const {
+      title,
+      image,
+      detail,
+      footer,
+      type,
+      // images,
+      blogContent,
+    } = req.body;
 
     try {
       const newBlog = new Blog({
@@ -75,6 +83,8 @@ router.post(
         detail,
         footer,
         type,
+        // images,
+        blogContent,
         user: req.user.id,
       });
 
@@ -92,7 +102,16 @@ router.post(
 // @desc      Update blogs
 // @access    Private
 router.put('/:id', auth, async (req, res) => {
-  const { title, image, detail, footer, type, likes } = req.body;
+  const {
+    title,
+    image,
+    detail,
+    footer,
+    type,
+    likes,
+    images,
+    blogContent,
+  } = req.body;
 
   // Build blog object
   const blogFields = {};
@@ -102,6 +121,8 @@ router.put('/:id', auth, async (req, res) => {
   if (footer) blogFields.footer = footer;
   if (type) blogFields.type = type;
   if (likes) blogFields.likes = likes;
+  // if (images) blogFields.images = images;
+  if (blogContent) blogFields.blogContent = blogContent;
 
   try {
     let blog = await Blog.findById(req.params.id);

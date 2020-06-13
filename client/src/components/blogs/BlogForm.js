@@ -271,6 +271,7 @@ const BlogForm = () => {
   } = blogContext;
 
   useEffect(() => {
+    console.log('useEffect=> Blog: ', blog, ' ,Current: ', current);
     if (current !== null) {
       setBlog(current);
     } else {
@@ -297,6 +298,7 @@ const BlogForm = () => {
   const { title, image, detail, footer, type, blogContent } = blog;
 
   const onChange = async (e) => {
+    console.log('onchange=> Blog: ', blog, ' ,Current: ', current);
     if (e.target.name === 'photo') {
       /////////////////
       // Upload to AWS
@@ -351,8 +353,12 @@ const BlogForm = () => {
     }
   };
   const onEditorChange = (html) => {
-    // console.log('inside Editor Blog: ', blog, 'current: ', current);
-    setBlog({ ...blog, blogContent: String(html) });
+    console.log('inside Editor Blog: ', blog, 'current: ', current);
+    if (current != null) {
+      setBlog({ ...current, blogContent: String(html) });
+    } else {
+      setBlog({ ...blog, blogContent: String(html) });
+    }
   };
 
   const onSubmit = (e) => {
