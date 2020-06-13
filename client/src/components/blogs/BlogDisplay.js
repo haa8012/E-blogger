@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { useParams } from 'react-router';
 import SocialShare from './SocialShare';
 import { Helmet } from 'react-helmet';
-import thump from '../layout/logo.png';
+import thump from './thump.jpg';
 import clap from '../layout/clap.svg';
 import BlogComments from '../comments/BlogComments';
 import parse from 'html-react-parser';
@@ -54,12 +54,11 @@ const BlogDisplay = () => {
       <Helmet>
         <meta
           property='og:image'
-          content='https://blogger-imageuploads.s3.amazonaws.com/thump-original-1590455951204.jpg'
+          //content='https://blogger-imageuploads.s3.amazonaws.com/thump-original-1590455951204.jpg'
+          content={thump}
         />
-        <meta
-          property='og:image:secure_url'
-          content='https://blogger-imageuploads.s3.amazonaws.com/thump-original-1590455951204.jpg'
-        />
+
+        <meta property='og:image:secure_url' content={thump} />
         <meta property='og:title' content={title} />
         <meta property='og:type' content='article' />
         <meta
